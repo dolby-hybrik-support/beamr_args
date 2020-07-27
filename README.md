@@ -27,8 +27,10 @@
 
 * Docker (mac)
   * it is recommended that you alias the docker command like so:
-    * `alias repro_creator='docker run -v `pwd`:`pwd` -w `pwd` beamr_args'`
-    * then to use: `beamr_args <input_job>` (see additional "usage")
+  ```
+     alias beamr_args='docker run -v `pwd`:`pwd` -w `pwd` beamr_args'
+  ```
+    * then to use: `beamr_args -c <config_file> <input_job>` (see additional "usage")
 
 ## Usage
 ### Example Included
