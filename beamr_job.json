@@ -1,0 +1,105 @@
+{
+    "definitions": {
+        "speed": "fast",
+        "target_bitrate": 4000,
+        "source_basepath": "s3://hybrik-test-assets",
+        "output_basepath": "s3://hybrik-temporary",
+        "beamr4x_options": "params.chroma_format_idc=2"
+    },
+    "name": "Beamr4x test",
+    "task_tags": [
+    ],
+    "payload": {
+        "elements": [
+            {
+                "uid": "source_file",
+                "kind": "source",
+                "payload": {
+                    "kind": "asset_complex",
+                    "payload": {
+                        "kind": "sequence",
+                        "asset_versions": [
+                            {
+                                "version_uid": "main1",
+                                "location": {
+                                    "storage_provider": "s3",
+                                    "path": "{{source_basepath}}"
+                                },
+                                "asset_components": [
+                                    {
+                                        "kind": "name",
+                                        "name": "tears_of_steel_1080p_2min.mp4",
+                                        "component_uid": "video"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "uid": "transcode_task",
+                "kind": "transcode",
+                "payload": {
+                    "location": {
+                        "storage_provider": "s3",
+                        "path": "{{output_basepath}}"
+                    },
+                    "targets": [
+                        {
+                            "file_pattern": "{source_basename}{default_extension}",
+                            "container": {
+                                "kind": "mp4"
+                            },
+                            "video": {
+                                "codec_provider": "beamr4x",
+                                "beamr4x_options": "{{beamr4x_options}}",
+                                "codec": "h264",
+                                "bitrate_mode": "vbr",
+                                "preset": "{{speed}}",
+                                "bitrate_kb": "{{target_bitrate}}",
+                                "max_bitrate_kb": 5750,
+                                "vbv_buffer_size_kb": 5750
+                            },
+                            "audio": [
+                                {
+                                    "codec": "aac",
+                                    "channels": 2,
+                                    "sample_rate": 48000,
+                                    "sample_size": 16,
+                                    "bitrate_kb": 128,
+                                    "bitrate_mode": "vbr"
+                                }
+                            ],
+                            "existing_files": "fail",
+                            "uid": "target1"
+                        }
+                    ],
+                    "options": {
+                        "pipeline": {
+                            "licenses": [
+                                "beamr4x"
+                            ]
+                        }
+                    }
+                }
+            }
+        ],
+        "connections": [
+            {
+                "from": [
+                    {
+                        "element": "source_file"
+                    }
+                ],
+                "to": {
+                    "success": [
+                        {
+                            "element": "transcode_task"
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}
