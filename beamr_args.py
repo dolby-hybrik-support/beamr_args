@@ -79,18 +79,18 @@ def main():
 		source_hybrik_job["definitions"]["beamr4_options"] = compiled_beamr_args
 
 
-	## Update each video target that uses beamr4x
-	items = jsonpath_rw_ext.parse('$..targets[?(video.codec_provider = "beamr4x")].video').find(source_hybrik_job)
-	for item in items:
+	## Update each video target that uses beamr4 (removed)
+	# items = jsonpath_rw_ext.parse('$..targets[?(video.codec_provider = "beamr4x")].video').find(source_hybrik_job)
+	# for item in items:
 
-		# copy the inmutable object
-		item_copy = item.value
-		logging.info("target before update" + json.dumps(item_copy, indent = 4))
+	# 	# copy the inmutable object
+	# 	item_copy = item.value
+	# 	logging.info("target before update" + json.dumps(item_copy, indent = 4))
 
-		# insert the placeholder
-		item_copy["beamr4_options"] = "{{beamr4_options}}"
-		pattern = jsonpath_rw_ext.parse(str(item.full_path))
-		json_object = pattern.update(source_hybrik_job, item_copy)
+	# 	# insert the placeholder
+	# 	item_copy["beamr4_options"] = "{{beamr4_options}}"
+	# 	pattern = jsonpath_rw_ext.parse(str(item.full_path))
+	# 	json_object = pattern.update(source_hybrik_job, item_copy)
 
 
 	## Write output new job
