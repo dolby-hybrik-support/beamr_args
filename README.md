@@ -1,5 +1,16 @@
 # Beamr Args Converter for Hybrik Jobs
 
+## Simplest usage, use Dockerhub image
+Mac:
+1) Install [Docker client](https://www.docker.com/products/docker-desktop)
+2) pull the dockerhub image: `docker pull hybriksupport/beamr_args`
+3) run
+  ```
+  docker run -v "`pwd`":"`pwd`"" -w "`pwd`" beamr_args -c 422UF20.cfg beamr_job.json
+  ```
+
+
+
 ## Requirements (either):
 * Local install (harder):
   * Python 3.6+
@@ -26,9 +37,7 @@
   * see "usage"
 
 * Docker (mac)
-  * it is recommended that you alias the docker command like so:
-    * `alias repro_creator='docker run -v `pwd`:`pwd` -w `pwd` beamr_args'`
-    * then to use: `beamr_args <input_job>` (see additional "usage")
+  * Run: ```docker run -v "`pwd`":"`pwd`"" -w "`pwd`" beamr_args -c 422UF20.cfg beamr_job.json```
 
 ## Usage
 ### Example Included

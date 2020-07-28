@@ -4,7 +4,7 @@
         "target_bitrate": 4000,
         "source_basepath": "s3://hybrik-test-assets",
         "output_basepath": "s3://hybrik-temporary",
-        "beamr4x_options": "params.chroma_format_idc=2"
+        "beamr4_options": "params.chroma_format_idc=2"
     },
     "name": "Beamr4x test",
     "task_tags": [
@@ -53,7 +53,7 @@
                             },
                             "video": {
                                 "codec_provider": "beamr4x",
-                                "beamr4x_options": "{{beamr4x_options}}",
+                                "beamr4_options": "{{beamr4_options}}",
                                 "codec": "h264",
                                 "bitrate_mode": "vbr",
                                 "preset": "{{speed}}",

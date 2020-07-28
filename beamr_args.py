@@ -69,14 +69,14 @@ def main():
 		logging.info("Input job does not have definitions, adding...")
 		temp_dict = {}
 		temp_dict["definitions"] = {
-			"beamr4x_options": compiled_beamr_args
+			"beamr4_options": compiled_beamr_args
 		}
 
 		temp_dict.update(source_hybrik_job)
 		source_hybrik_job = temp_dict
 	else:
 		logging.info("Input job contains definitions, adding beamr: " + str(line))
-		source_hybrik_job["definitions"]["beamr4x_options"] = compiled_beamr_args
+		source_hybrik_job["definitions"]["beamr4_options"] = compiled_beamr_args
 
 
 	## Update each video target that uses beamr4x
@@ -88,7 +88,7 @@ def main():
 		logging.info("target before update" + json.dumps(item_copy, indent = 4))
 
 		# insert the placeholder
-		item_copy["beamr4x_options"] = "{{beamr4x_options}}"
+		item_copy["beamr4_options"] = "{{beamr4_options}}"
 		pattern = jsonpath_rw_ext.parse(str(item.full_path))
 		json_object = pattern.update(source_hybrik_job, item_copy)
 
