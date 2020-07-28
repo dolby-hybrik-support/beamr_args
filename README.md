@@ -6,7 +6,7 @@ Mac:
 2) pull the dockerhub image: `docker pull hybriksupport/beamr_args`
 3) run
   ```
-  docker run -v "`pwd`":"`pwd`"" -w "`pwd`" beamr_args -c 422UF20.cfg beamr_job.json
+  docker run -v "`pwd`":"`pwd`" -w "`pwd`" beamr_args -c 422UF20.cfg beamr_job.json
   ```
 
 
